@@ -54,7 +54,7 @@ public class DisjointSet{
         }
         else{
             ds.parents[pv] = pu;
-            ds.rank[pu] += ds.size[pv]; // updating size if both the ultimate parents have same size or size[pu] > size[pv]
+            ds.size[pu] += ds.size[pv]; // updating size if both the ultimate parents have same size or size[pu] > size[pv]
         }
 
     }
@@ -71,24 +71,28 @@ public class DisjointSet{
 
     static void printMetaData(DisjointSet ds){
         System.out.println("Parents: ");
-        for(int i = 0; i<8; i++){
+        for(int i = 0; i<ds.parents.length; i++){
             System.out.print(ds.parents[i] + " ");
             
         }
         System.out.println("");
         System.out.println("Rank: ");
 
-        for(int i = 0; i<8; i++){
+        for(int i = 0; i<ds.rank.length; i++){
             System.out.print(ds.rank[i] + " ");
         }
         System.out.println("");
         System.out.println("Size: ");
-        for(int i = 0; i<8; i++){
+        for(int i = 0; i<ds.size.length; i++){
             System.out.print(ds.size[i] + " ");
         }
         System.out.println("");
     }
     public static void main(String[] args) {
+        System.out.println("");
+        System.out.println("Disjoint by RANK: ");
+        System.out.println("");
+
         DisjointSet ds = new DisjointSet(0, 7); // can run on any start and end node
         unionByRank(ds, 4, 1);
         printMetaData(ds);
@@ -120,8 +124,39 @@ public class DisjointSet{
 
         printMetaData(ds);
 
+        System.out.println("");
+        System.out.println("Disjoint by SIZE: ");
+        System.out.println("");
         
-        
+        DisjointSet ds2 = new DisjointSet(0, 10);
+        unionBySize(ds2, 4, 1);
+        printMetaData(ds2);
+        unionBySize(ds2, 1, 3);
+        printMetaData(ds2);
+        unionBySize(ds2, 1, 0);
+        printMetaData(ds2);
+        unionBySize(ds2, 1, 2);
+        printMetaData(ds2);
 
+        if(getParent(ds2, 1) == getParent(ds2, 7)){
+            System.out.println("Yes");
+        }else{
+            System.out.println("No");
+        }
+
+        unionBySize(ds2, 6, 5);
+        printMetaData(ds2);
+        unionBySize(ds2, 5, 7);
+        printMetaData(ds2);
+        unionBySize(ds2, 4, 6);
+        printMetaData(ds2);
+
+        if(getParent(ds2, 1) == getParent(ds2, 7)){
+            System.out.println("Yes");
+        }else{
+            System.out.println("No");
+        }
+
+        printMetaData(ds2);
     }
 }
