@@ -89,7 +89,7 @@ public class DisjointSet{
         System.out.println("");
     }
     public static void main(String[] args) {
-        DisjointSet ds = new DisjointSet(0, 7);
+        DisjointSet ds = new DisjointSet(0, 7); // can run on any start and end node
         unionByRank(ds, 4, 1);
         printMetaData(ds);
         unionByRank(ds, 1, 3);
